@@ -19,5 +19,6 @@ Route::prefix(env('ADMIN_PREFIX'))->group(function () {
     Route::group(['middleware' => ['admin']], function () {
         Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/file-manager', [AdminController::class, 'filemanager'])->name('admin.filemanager');
+        Route::get('/mailbox', [AdminController::class, 'mailbox'])->name('admin.mailbox');
     });
 });

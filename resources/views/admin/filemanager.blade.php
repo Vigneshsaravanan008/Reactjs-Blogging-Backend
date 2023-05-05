@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="{{ asset('admin-assets/file-manager/css/theme.css') }}">
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="nk-content-inner">
+    <div class="content-header">
+        <div class="container-fluid">
             <div class="nk-content-body">
                 <div class="nk-fmg">
                     <div class="nk-fmg-aside toggle-screen-lg" data-content="files-aside" data-toggle-overlay="true"

@@ -43,4 +43,9 @@ class AdminController extends Controller
     {
         return view('admin.filemanager');
     }
+
+    public function mailbox()
+    {
+        return view('admin.mailbox');
+    }
 }
