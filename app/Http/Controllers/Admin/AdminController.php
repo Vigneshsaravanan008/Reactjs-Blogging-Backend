@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ToEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -36,6 +38,10 @@ class AdminController extends Controller
 
     public function dashboard()
     {
+        $salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
+        $data = DB::table('admins')->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(email), '{$salt}') USING utf8mb4) = 'admin@gmail.com' ");
+        // return $salt;
+
         return view('admin.dashboard');
     }
 
@@ -44,8 +50,14 @@ class AdminController extends Controller
         return view('admin.filemanager');
     }
 
-    public function mailbox()
+    public function inbox()
     {
-        return view('admin.mailbox');
+        $inbox = ToEmail::where('send_to_user_id', Auth::guard('admin')->user()->id)->get();
+        return view('admin.mail.inbox', compact('inbox'));
+    }
+
+    public function compose()
+    {
+        return view('admin.mail.compose');
     }
 }

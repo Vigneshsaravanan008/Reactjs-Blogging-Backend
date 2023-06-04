@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('mail_id');
             $table->string('from_email');
             $table->string('to_email');
+            $table->integer('send_to_user_id');
             $table->integer('is_seen')->nullable();
             $table->timestamps();
             $table->softDeletes();

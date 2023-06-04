@@ -1,5 +1,5 @@
 <div class="col-md-3">
-    <a href="compose.html" class="btn btn-primary btn-block mb-3">Compose</a>
+    <a href="{{ route('admin.compose') }}" class="btn btn-primary btn-block mb-3">Compose</a>
 
     <div class="card">
         <div class="card-header">
@@ -14,7 +14,7 @@
         <div class="card-body p-0">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item active">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.inbox')}}" class="nav-link">
                         <i class="fas fa-inbox"></i> Inbox
                         <span class="badge bg-primary float-right">12</span>
                     </a>

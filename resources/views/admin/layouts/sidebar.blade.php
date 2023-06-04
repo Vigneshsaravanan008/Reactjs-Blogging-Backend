@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.mailbox') }}" class="nav-link">
+                    <a href="{{ route('admin.inbox') }}" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
                             MailBox

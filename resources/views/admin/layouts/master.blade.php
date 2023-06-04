@@ -72,6 +72,11 @@
     <script src="{{ asset('admin-assets/dist/js/adminlte.js') }}"></script>
     <script src="{{ asset('admin-assets/dist/js/demo.js') }}"></script>
     <script src="{{ asset('admin-assets/dist/js/pages/dashboard.js') }}"></script>
+    <script>
+        $(function() {
+            $('#compose-textarea').summernote()
+        })
+    </script>
     @stack('javascript')
 </body>
 
