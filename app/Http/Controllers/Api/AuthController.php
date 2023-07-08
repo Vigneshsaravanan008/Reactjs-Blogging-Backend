@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -20,12 +21,13 @@ class AuthController extends Controller
             ]);
 
             if (User::where('email', $request->email)->exists()) {
-                if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
+                if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
                     $user = User::where('email', $request->email)->first();
+
                     return response()->json([
                         'status' => 200,
                         'user' => $user,
-                        'access_token' => $user->createToken('token')->accessToken,
+                        'token' => $user->createToken('Laravel Password Grant Client')->accessToken ,
                     ]);
                 } else {
                     return response()->json([
@@ -45,5 +47,38 @@ class AuthController extends Controller
                 'message' => $e->getMessage(),
             ]);
         }
+    }
+
+    public function register(Request $request)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required'
+            ]);
+
+            User::create([
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => Hash::make(request('password'))
+            ]);
+
+            $user = User::where('email', request('email'))->first();
+
+
+
+            return response()->json(['status' => 200, 'user' => $user, 'access_token' => $user->createToken('token')->accessToken]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'status' => 400,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function profile()
+    {
+        return $user = User::where('id', Auth::user()->id)->first();
     }
 }
