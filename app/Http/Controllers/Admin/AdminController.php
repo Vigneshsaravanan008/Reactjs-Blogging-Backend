@@ -33,31 +33,13 @@ class AdminController extends Controller
             }
         }
 
-        return view('admin.auth.login');
+        return view('auth.login');
     }
 
     public function dashboard()
     {
-        $salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
-        $data = DB::table('admins')->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(email), '{$salt}') USING utf8mb4) = 'admin@gmail.com' ");
-        // return $salt;
-
-        return view('admin.dashboard');
-    }
-
-    public function filemanager()
-    {
-        return view('admin.filemanager');
-    }
-
-    public function inbox()
-    {
-        $inbox = ToEmail::where('send_to_user_id', Auth::guard('admin')->user()->id)->get();
-        return view('admin.mail.inbox', compact('inbox'));
-    }
-
-    public function compose()
-    {
-        return view('admin.mail.compose');
+        // $salt = substr(hash('sha256', env('APP_KEY')), 0, 16);
+        // $data = DB::table('admins')->whereRaw("CONVERT(AES_DECRYPT(FROM_BASE64(email), '{$salt}') USING utf8mb4) = 'admin@gmail.com' ");
+        return view('home');
     }
 }
