@@ -27,7 +27,7 @@ class AuthController extends Controller
                     return response()->json([
                         'status' => 200,
                         'user' => $user,
-                        'token' => $user->createToken('Laravel Password Grant Client')->accessToken ,
+                        'token' => $user->createToken('Laravel Password Grant Client')->accessToken,
                     ]);
                 } else {
                     return response()->json([
@@ -43,7 +43,7 @@ class AuthController extends Controller
             }
         } catch (\Throwable $e) {
             return response()->json([
-                'status' => 400,
+                'status' => 400, 
                 'message' => $e->getMessage(),
             ]);
         }
@@ -79,6 +79,7 @@ class AuthController extends Controller
 
     public function profile()
     {
-        return $user = User::where('id', Auth::user()->id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
+        return response()->json(['status' => 200, 'user' => $user]);
     }
 }

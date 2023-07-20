@@ -21,7 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::group(['prefix' => 'v1'], function () {
+
+    //Auth
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::get('profile', [AuthController::class, 'profile']);
+
+    //error
+    Route::get('/error', function () {
+        return response()->json(['status' => 403, 'is_token_expired' => true]);
+    });
+
+    Route::middleware(['auth:api'])->group(function () {
+        Route::get('profile', [AuthController::class, 'profile']);
+    });
 });
