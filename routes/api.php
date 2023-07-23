@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BlogController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,12 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::middleware(['auth:api'])->group(function () {
         Route::get('profile', [AuthController::class, 'profile']);
+
+        //Blogs
+        Route::post('/blog/posts', [BlogController::class, 'blog']);
+        Route::post('/blog/create', [BlogController::class, 'create']);
+        Route::post('/blog/edit', [BlogController::class, 'edit']);
+        Route::post('/blog/update', [BlogController::class, 'update']);
+        Route::post('/blog/delete', [BlogController::class, 'delete']);
     });
 });
