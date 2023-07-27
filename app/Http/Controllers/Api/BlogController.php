@@ -20,7 +20,6 @@ class BlogController extends Controller
 
     public function create(Request $request)
     {
-
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -48,7 +47,8 @@ class BlogController extends Controller
     public function edit(Request $request)
     {
         $blog = Blog::where('id', request('id'))->first();
-        return response()->json(['status' => 200, 'blog' => $blog]);
+        $tags = Tag::where('blog_id', $request->id)->get();
+        return response()->json(['status' => 200, 'blog' => $blog, 'tags' => $tags]);
     }
 
     public function update(Request $request)
@@ -63,6 +63,26 @@ class BlogController extends Controller
             'title' => request('title'),
             'description' => request('description')
         ]);
+
+        $tags = explode(',', $request->tags);
+
+        foreach ($tags as $tag) {
+            $checkTag = Tag::where('user_id', Auth::guard('api')->user()->id)->where('tag', $tag)->first();
+            if (!$checkTag) {
+                Tag::create([
+                    'user_id' => Auth::guard('api')->user()->id,
+                    'tag' => $tag,
+                    'blog_id' => $request->id
+                ]);
+            }
+        }
+        $checkTags = Tag::where('user_id', Auth::guard('api')->user()->id)->where('blog_id', $request->id)->get();
+
+        foreach ($checkTags as $gettag) {   
+            if (in_array($tags, $gettag->tag)) {
+                Tag::where('user_id', Auth::guard('api')->user()->id)->where('id', $gettag->id)->delete();
+            }
+        }
 
         return response()->json(['status' => 200, 'message' => 'Blogs Updated Successfully']);
     }
