@@ -95,16 +95,16 @@
                         <span class="user-status">Admin</span>
                     </div>
                     <span class="avatar">
-                        <img class="round" src="{{ asset('app-assets/images/portrait/small/sakthi.png') }}"
+                        <img class="round" src="{{ asset('app-assets/images/avatar.jpg') }}"
                             alt="Sakthi" height="40" width="40">
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{route('admin.profile')}}">
                         <i class="me-50" data-feather="user"></i> Profile </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">
+                    <a class="dropdown-item" href="{{route('admin.settings')}}">
                         <i class="me-50" data-feather="settings"></i> Settings </a>
                     <a class="dropdown-item" href="#">
                         <i class="me-50" data-feather="power"></i> Logout </a>

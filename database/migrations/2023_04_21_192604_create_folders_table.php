@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('folders', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('parent_id');
+            $table->integer('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

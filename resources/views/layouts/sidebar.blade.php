@@ -6,7 +6,7 @@
                     {{-- @php($settings=App\Models\Setting::first()) --}}
                     <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
                         <h2 class="brand-text">
-                            <img src="{{asset(@$settings->white_favicon_icon)}}" width="100px" height="35px" alt="Einstro Academy"/>
+                            <img src="{{asset(@$settings->favicon_icon)}}" width="100px" height="35px" alt="File System"/>
                         </h2>
                     </a>
             </li>
@@ -41,8 +41,31 @@
                 </a>
             </li>
             <li class="navigation-header">
-                <span data-i18n="Courses">Courses</span>
+                <span data-i18n="Users">User Management</span>
+                {{-- <i data-feather="users"></i> --}}
+            </li>
+            <li class=" nav-item">
+                <a class="d-flex align-items-center" href="javascript:void(0)"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Card">User</span></a>
+                <ul class="menu-content">
+                    <li class="{{ request()->routeIs('user.index') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{route('user.index')}}">
+                            <i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Test Preparation">User</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="navigation-header">
+                <span data-i18n="Settings">Settings</span>
                 <i data-feather="more-horizontal"></i>
+            </li>
+
+            <li class=" nav-item"><a class="d-flex align-items-center" href="javascript:void(0)"> <i data-feather='settings'></i><span class="menu-title text-truncate" data-i18n="Settings">Settings</span></a>
+                <ul class="menu-content">
+                    <li class="{{ request()->routeIs('admin.settings') ? 'active' : '' }}">
+                        <a class="d-flex align-items-center" href="{{ route('admin.settings') }}"> <i data-feather='settings'></i><span class="menu-item text-truncate" data-i18n="Test Preparation">Settings</span></a>
+                    </li>
+                </ul>
             </li>
 
         </ul>
